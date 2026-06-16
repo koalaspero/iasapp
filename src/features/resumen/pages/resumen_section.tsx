@@ -257,7 +257,7 @@ export default function ResumenSection() {
                                             </TableCell>
                                         </TableRow>
                                     ) : (
-                                        resumenFiltrado.slice(0, resumen.length - 1).map((row) => (
+                                        resumenFiltrado.map((row) => (
                                             <TableRow hover key={row.modelo}>
                                                 <TableCell align="center">{row.modelo}</TableCell>
                                                 <TableCell align="center">{row.inventario}</TableCell>
