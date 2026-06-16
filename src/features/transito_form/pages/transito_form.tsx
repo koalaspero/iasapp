@@ -12,6 +12,7 @@ import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { useEffect, useState } from "react";
+import 'dayjs/locale/es'; 
 
 export default function TransitoFormSection(){
     const [formData, setFormData] = useState(
@@ -154,9 +155,10 @@ export default function TransitoFormSection(){
                         </Grid>
 
                         <Grid size={{ xs: 12, md: 6 }}>
-                            <LocalizationProvider dateAdapter={AdapterDayjs}>
+                            <LocalizationProvider dateAdapter={AdapterDayjs} adapterLocale="es">
                                 <DatePicker
                                     label="Fecha de Corte"
+                                    format = "DD/MM/YYYY"
                                     value={formData.fechaCorte}
                                     onChange={(value) =>
                                     handleChange("fechaCorte", value)
