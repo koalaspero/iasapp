@@ -209,8 +209,9 @@ export default function InventarioFormSection() {
             </Grid>
 
             <Grid size={{ xs: 12, md: 6 }}>
-              <LocalizationProvider dateAdapter={AdapterDayjs}>
+              <LocalizationProvider dateAdapter={AdapterDayjs} adapterLocale="es">
                 <DatePicker
+                    format="DD/MM/YYYY
                     label="Fecha de Corte"
                     value={formData.fechaCorte}
                     onChange={(value) =>
