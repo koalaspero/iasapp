@@ -13,6 +13,7 @@ import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { useEffect, useState } from "react";
 import 'dayjs/locale/es'; 
+import dayjs from "dayjs";
 
 export default function OportunidadFormSection(){
 
@@ -207,6 +208,7 @@ export default function OportunidadFormSection(){
                         <Grid size={{ xs: 12, md: 6 }}>
                             <LocalizationProvider dateAdapter={AdapterDayjs} adapterLocale="es">
                                 <DatePicker
+                                    minDate= {dayjs()}
                                     label="Fecha de Cierre"
                                     format="DD/MM/YYYY"
                                     value={formData.fechaCierre}
