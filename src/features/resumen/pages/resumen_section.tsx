@@ -12,6 +12,7 @@ export default function ResumenSection() {
 
     const [resumen, setResumen] = useState<Resumen[]>([]);
     const [resumenFiltrado, setResumenFiltrado] = useState<Resumen[]>([]);
+    const [totalResumen, setTotalResumen] = useState<Resumen | null>(null);
     
     const [loadingResumen, setLoadingResumen] = useState(true);
     const [statusDialog, setStatusDialog] = useState({
@@ -55,28 +56,8 @@ export default function ResumenSection() {
             setLoadingResumen(true);
 
             const data = await getResumen();
-            console.log(data);
-            const total : Resumen = {
-                inventario: data.reduce((sum, r) => sum + r.inventario, 0),
-                enTransito: data.reduce((sum, r) => sum + r.enTransito, 0),
-                totalDisponible: data.reduce((sum, r) => sum + r.totalDisponible, 0),
-                oportunidades: data.reduce((sum, r) => sum + r.oportunidades, 0),
-                porcentajeCierrePromedio: data.length > 0
-                    ? data.reduce(
-                        (sum, r) => sum + r.porcentajeCierrePromedio,
-                        0
-                    ) / data.length
-                    : 0,
-                demandaEsperada: data.reduce((sum, r) => sum + r.demandaEsperada, 0),
-                gap: data.reduce((sum, r) => sum + r.gap, 0),
-                modelo: "TOTAL",
-                modeloFamilia: "",
-                modeloLineaProducto: ""
-            };
-
-            const resumenConTotal = data.concat([total]);
     
-            setResumen(resumenConTotal);
+            setResumen(data);
           } catch (error) {
             console.error(error);
           } finally {
@@ -119,9 +100,10 @@ export default function ResumenSection() {
             modeloLineaProducto: ""
          };
 
-        const resumenConTotal = filtered.concat([total]);
+        
 
-        setResumenFiltrado(resumenConTotal);
+        setResumenFiltrado(filtered);
+        setTotalResumen(total);
 
     }, [
         resumen,
@@ -305,38 +287,36 @@ export default function ResumenSection() {
                                         ))
                                     )}
 
-                                    {loadingResumen ? (
+                                    {(!totalResumen) ? (
                                         <></>
                                     ) : (
-                                        resumenFiltrado.slice(-1).map((row) => (
-                                            <TableRow hover key={row.modelo}>
-                                                <TableCell sx={{ fontWeight: 600, backgroundColor: themePalette.NIGHT_BLUE, color: "white",}} align="center">{row.modelo}</TableCell>
-                                                <TableCell sx={{ fontWeight: 600, backgroundColor: themePalette.NIGHT_BLUE, color: "white",}} align="center">{row.inventario}</TableCell>
-                                                <TableCell sx={{ fontWeight: 600, backgroundColor: themePalette.NIGHT_BLUE, color: "white",}} align="center">{row.enTransito}</TableCell>
-                                                <TableCell sx={{ fontWeight: 600, backgroundColor: themePalette.NIGHT_BLUE, color: "white",}} align="center">{row.totalDisponible}</TableCell>
-                                                <TableCell sx={{ fontWeight: 600, backgroundColor: themePalette.NIGHT_BLUE, color: "white",}} align="center">{row.oportunidades}</TableCell>
-                                                <TableCell sx={{ fontWeight: 600, backgroundColor: themePalette.NIGHT_BLUE, color: "white",}} align="center">
-                                                    {row.porcentajeCierrePromedio.toFixed(1)}%
-                                                </TableCell>
-                                                <TableCell sx={{ fontWeight: 600, backgroundColor: themePalette.NIGHT_BLUE, color: "white",}} align="center">
-                                                    {row.demandaEsperada.toFixed(1)}
-                                                </TableCell>
-                                                <TableCell
-                                                    sx={{
-                                                        color:
-                                                            row.gap < 0
-                                                            ? "error.main"
-                                                            : row.gap === 0
-                                                            ? "warning.main"
-                                                            : themePalette.BUTTONOK,
-                                                        fontWeight: 600,
-                                                        backgroundColor: themePalette.NIGHT_BLUE
-                                                    }}
-                                                >
-                                                    {row.gap.toFixed(1)}
-                                                </TableCell>
-                                            </TableRow>
-                                        ))
+                                        <TableRow hover key={totalResumen.modelo}>
+                                            <TableCell sx={{ fontWeight: 600, backgroundColor: themePalette.NIGHT_BLUE, color: "white",}} align="center">{totalResumen.modelo}</TableCell>
+                                            <TableCell sx={{ fontWeight: 600, backgroundColor: themePalette.NIGHT_BLUE, color: "white",}} align="center">{totalResumen.inventario}</TableCell>
+                                            <TableCell sx={{ fontWeight: 600, backgroundColor: themePalette.NIGHT_BLUE, color: "white",}} align="center">{totalResumen.enTransito}</TableCell>
+                                            <TableCell sx={{ fontWeight: 600, backgroundColor: themePalette.NIGHT_BLUE, color: "white",}} align="center">{totalResumen.totalDisponible}</TableCell>
+                                            <TableCell sx={{ fontWeight: 600, backgroundColor: themePalette.NIGHT_BLUE, color: "white",}} align="center">{totalResumen.oportunidades}</TableCell>
+                                            <TableCell sx={{ fontWeight: 600, backgroundColor: themePalette.NIGHT_BLUE, color: "white",}} align="center">
+                                                {totalResumen.porcentajeCierrePromedio.toFixed(1)}%
+                                            </TableCell>
+                                            <TableCell sx={{ fontWeight: 600, backgroundColor: themePalette.NIGHT_BLUE, color: "white",}} align="center">
+                                                {totalResumen.demandaEsperada.toFixed(1)}
+                                            </TableCell>
+                                            <TableCell
+                                                sx={{
+                                                    color:
+                                                        totalResumen.gap < 0
+                                                        ? "error.main"
+                                                        : totalResumen.gap === 0
+                                                        ? "warning.main"
+                                                        : themePalette.BUTTONOK,
+                                                    fontWeight: 600,
+                                                    backgroundColor: themePalette.NIGHT_BLUE
+                                                }}
+                                            >
+                                                {totalResumen.gap.toFixed(1)}
+                                            </TableCell>
+                                        </TableRow>
                                     )}
                                 </TableBody>
                             </Table>
