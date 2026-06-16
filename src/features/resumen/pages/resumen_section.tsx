@@ -308,7 +308,7 @@ export default function ResumenSection() {
                                     {loadingResumen ? (
                                         <></>
                                     ) : (
-                                        resumen.slice(-1).map((row) => (
+                                        resumenFiltrado.slice(-1).map((row) => (
                                             <TableRow hover key={row.modelo}>
                                                 <TableCell sx={{ fontWeight: 600, backgroundColor: themePalette.NIGHT_BLUE, color: "white",}} align="center">{row.modelo}</TableCell>
                                                 <TableCell sx={{ fontWeight: 600, backgroundColor: themePalette.NIGHT_BLUE, color: "white",}} align="center">{row.inventario}</TableCell>
