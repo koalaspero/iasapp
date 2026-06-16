@@ -101,7 +101,27 @@ export default function ResumenSection() {
             );
         });
 
-        setResumenFiltrado(filtered);
+        const total : Resumen = {
+            inventario: filtered.reduce((sum, r) => sum + r.inventario, 0),
+            enTransito: filtered.reduce((sum, r) => sum + r.enTransito, 0),
+            totalDisponible: filtered.reduce((sum, r) => sum + r.totalDisponible, 0),
+            oportunidades: filtered.reduce((sum, r) => sum + r.oportunidades, 0),
+            porcentajeCierrePromedio: filtered.length > 0
+                ? filtered.reduce(
+                    (sum, r) => sum + r.porcentajeCierrePromedio,
+                    0
+                ) / filtered.length
+                : 0,
+            demandaEsperada: filtered.reduce((sum, r) => sum + r.demandaEsperada, 0),
+            gap: filtered.reduce((sum, r) => sum + r.gap, 0),
+            modelo: "TOTAL",
+            modeloFamilia: "",
+            modeloLineaProducto: ""
+         };
+
+        const resumenConTotal = filtered.concat([total]);
+
+        setResumenFiltrado(resumenConTotal);
 
     }, [
         resumen,
