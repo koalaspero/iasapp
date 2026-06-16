@@ -1,5 +1,5 @@
-import { Oportunidad } from "@prisma/client";
 import dayjs, { Dayjs } from "dayjs";
+import { Oportunidad } from "../models/Oportunidad";
 
 
 export class OportunidadFormData {

@@ -1,6 +1,7 @@
 "use client";
 
 import { ApiStatusDialog } from "@/src/componentes/feedback/ApiStatusDialog";
+import { Modelo } from "@/src/generated/prisma/client";
 import { PAISES } from "@/src/lib/countryList";
 import { getModelos } from "@/src/services/modelosService";
 import { createOportunidad } from "@/src/services/oportunidadService";
@@ -10,7 +11,6 @@ import { Autocomplete, Button, Container, Grid, InputAdornment, MenuItem, Paper,
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
-import { Modelo } from "@prisma/client";
 import { useEffect, useState } from "react";
 
 export default function OportunidadFormSection(){

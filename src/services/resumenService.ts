@@ -1,4 +1,3 @@
-import { Modelo } from "@prisma/client";
 import { Resumen } from "../types/models/Resumen";
 
 export async function getResumen(): Promise<Resumen[]> {

@@ -1,4 +1,4 @@
-import { Modelo } from "@prisma/client";
+import { Modelo } from "../generated/prisma/client";
 
 export async function getModelos(): Promise<Modelo[]> {
   const response = await fetch("/api/modelos");

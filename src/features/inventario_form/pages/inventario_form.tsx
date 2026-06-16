@@ -17,12 +17,12 @@ import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { InventarioFormData, InventarioFormErrors } from "@/src/types/forms/InventarioFormData";
-import { Modelo } from "@prisma/client";
 import { getModelos } from "@/src/services/modelosService";
 import { themePalette } from "@/src/theme/theme.config";
 import { PAISES } from "@/src/lib/countryList";
 import { createInventario } from "@/src/services/inventarioService";
 import { ApiStatusDialog } from "@/src/componentes/feedback/ApiStatusDialog";
+import { Modelo } from "@/src/generated/prisma/client";
 
 export default function InventarioFormSection() {
   const [formData, setFormData] = useState(
