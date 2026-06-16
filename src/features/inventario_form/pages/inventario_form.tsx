@@ -13,6 +13,7 @@ import {
   Typography,
 } from "@mui/material";
 import dayjs from "dayjs";
+import 'dayjs/locale/es'; 
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
@@ -211,7 +212,7 @@ export default function InventarioFormSection() {
             <Grid size={{ xs: 12, md: 6 }}>
               <LocalizationProvider dateAdapter={AdapterDayjs} adapterLocale="es">
                 <DatePicker
-                    format="DD/MM/Yyyy" 
+                    format="DD/MM/YYYY" 
                     label="Fecha de Corte"
                     value={formData.fechaCorte}
                     onChange={(value) =>
